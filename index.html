@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora ROI · Implementación de IA</title>
+  <meta name="description" content="Calculá el retorno de inversión de implementar IA en tu negocio: ahorro de tiempo, errores evitados y payback.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-text">
+        <h1 class="title">Calculadora de ROI · IA en tu negocio</h1>
+        <p class="subtitle">Estimá el retorno de implementar IA con tus propios números, en menos de un minuto.</p>
+      </div>
+      <div class="currency-switch" role="group" aria-label="Selector de moneda">
+        <label for="currency" class="sr-only">Moneda</label>
+        <select id="currency" name="currency" aria-label="Moneda">
+          <option value="USD" selected>USD</option>
+          <option value="ARS">ARS</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="inputs-col" aria-labelledby="inputs-heading">
+      <h2 id="inputs-heading" class="sr-only">Datos de tu negocio</h2>
+
+      <fieldset class="block">
+        <legend class="block-title">Tu tiempo</legend>
+
+        <div class="field">
+          <label for="horasAntes">Horas semanales actuales en el proceso</label>
+          <input id="horasAntes" name="horasAntes" type="text" inputmode="decimal" autocomplete="off" value="20">
+          <small class="hint">Cuántas horas dedica tu equipo por semana hoy.</small>
+        </div>
+
+        <div class="field">
+          <label for="horasDespues">Horas semanales después de IA</label>
+          <input id="horasDespues" name="horasDespues" type="text" inputmode="decimal" autocomplete="off" value="4">
+          <small class="hint">Estimación realista con IA implementada.</small>
+        </div>
+
+        <div class="field">
+          <label for="costoHora">Costo por hora cargado</label>
+          <input id="costoHora" name="costoHora" type="text" inputmode="decimal" autocomplete="off" value="30">
+          <small class="hint">Salario + cargas sociales por hora del equipo.</small>
+        </div>
+      </fieldset>
+
+      <fieldset class="block">
+        <legend class="block-title">Tus errores</legend>
+
+        <div class="field">
+          <label for="volumenMensual">Volumen mensual de operaciones</label>
+          <input id="volumenMensual" name="volumenMensual" type="text" inputmode="decimal" autocomplete="off" value="200">
+          <small class="hint">Operaciones, casos o trámites por mes.</small>
+        </div>
+
+        <div class="field">
+          <label for="tasaErrorAntes">Tasa de error actual (%)</label>
+          <input id="tasaErrorAntes" name="tasaErrorAntes" type="text" inputmode="decimal" autocomplete="off" value="5">
+          <small class="hint">Porcentaje de operaciones con error o reproceso hoy.</small>
+        </div>
+
+        <div class="field">
+          <label for="tasaErrorDespues">Tasa de error con IA (%)</label>
+          <input id="tasaErrorDespues" name="tasaErrorDespues" type="text" inputmode="decimal" autocomplete="off" value="1">
+          <small class="hint">Estimación realista: típicamente entre 1% y 2%.</small>
+        </div>
+
+        <div class="field">
+          <label for="costoError">Costo promedio por error</label>
+          <input id="costoError" name="costoError" type="text" inputmode="decimal" autocomplete="off" value="50">
+          <small class="hint">Costo de corregir un error o resolver un caso fallido.</small>
+        </div>
+      </fieldset>
+
+      <fieldset class="block">
+        <legend class="block-title">Tu inversión</legend>
+
+        <div class="field">
+          <label for="costoUnico">Costo único de implementación</label>
+          <input id="costoUnico" name="costoUnico" type="text" inputmode="decimal" autocomplete="off" value="5000">
+          <small class="hint">Setup, integración y capacitación: lo que se paga una vez.</small>
+        </div>
+
+        <div class="field">
+          <label for="costoMensual">Costo mensual recurrente</label>
+          <input id="costoMensual" name="costoMensual" type="text" inputmode="decimal" autocomplete="off" value="300">
+          <small class="hint">Suscripción del software + mantenimiento mensual.</small>
+        </div>
+      </fieldset>
+
+      <button type="button" id="reset" class="reset-btn">Reiniciar valores</button>
+    </section>
+
+    <section class="results-col" aria-labelledby="results-heading" aria-live="polite">
+      <h2 id="results-heading" class="sr-only">Resultados</h2>
+
+      <div class="card card-hero">
+        <span class="card-label">ROI año 1</span>
+        <span class="card-value card-value-hero" id="r-roi">—</span>
+        <span class="card-foot" id="r-roi-foot">Retorno sobre la inversión total del primer año.</span>
+      </div>
+
+      <div class="card">
+        <span class="card-label">Payback</span>
+        <span class="card-value" id="r-payback">—</span>
+        <span class="card-foot">Cuántos meses tarda en recuperarse la inversión inicial.</span>
+      </div>
+
+      <div class="card">
+        <span class="card-label">Ahorro neto anual</span>
+        <span class="card-value" id="r-neto">—</span>
+        <span class="card-foot">Beneficio bruto menos costos del primer año.</span>
+      </div>
+
+      <div class="card">
+        <span class="card-label">Beneficio bruto anual</span>
+        <span class="card-value" id="r-bruto">—</span>
+        <span class="card-foot">Suma de tiempo ahorrado + errores evitados.</span>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-head">
+          <h3 class="chart-title">Break-even a 24 meses</h3>
+          <p class="chart-sub">Beneficio acumulado mes a mes desde la inversión inicial.</p>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="breakEvenChart" aria-label="Gráfico de beneficio acumulado a 24 meses" role="img"></canvas>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Cálculo conservador: solo cuenta tiempo ahorrado y errores evitados, sin proyecciones de ingresos.</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  <script src="calculator.js"></script>
+</body>
+</html>
